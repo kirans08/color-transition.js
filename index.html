@@ -3,7 +3,7 @@
 	<title>Color Transition Test</title>
 		<script  src="dist/color-transition.js"></script>
 </head>
-	<body  class="color-transition-target">
+	<body id="y" class="color-transition-target" color-min="190" color-max="250" refresh-interval="1" >
 		<h1 id="t">Test Color Transition Header</h1>
 	
 
@@ -18,9 +18,11 @@
 
 
 			setTimeout(function(){
+				console.log('Start');
 				stopColorTransition()
 			},3000);
 			setTimeout(function(){
+				console.log('Stop');
 				startColorTransition()
 			},6000);
 		}

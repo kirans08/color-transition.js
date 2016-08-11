@@ -19,7 +19,7 @@ function getValue(targetElement, property) {
 	
 	if(targetElement.hasAttribute(property)){
 
-		return targetElement.getAttribute(properxty);
+		return targetElement.getAttribute(property);
 
 	}
 	else{
@@ -105,7 +105,7 @@ function updateValue(colorCode, dir) {
 
 function getCurrentColors(targetElement, targetProperty) {
 
-	var colorData, currentColorValue;
+	var colorData, currentColorValue, regex, result;
 
 	if(targetElement === undefined || targetProperty === undefined) {
 
@@ -122,9 +122,12 @@ function getCurrentColors(targetElement, targetProperty) {
 
 	}
 
-	colorData['red'] = parseInt( currentColorValue.substr(4,2));
-	colorData['green'] = parseInt( currentColorValue.substr(8,2));
-	colorData['blue'] = parseInt( currentColorValue.substr(12,2));
+	regex = /(\d+), (\d+), (\d+)/;
+	result = currentColorValue.match(regex);
+
+	colorData['red'] = parseInt( result[1]);
+	colorData['green'] = parseInt( result[2]);
+	colorData['blue'] = parseInt( result[3]);
 
 	return colorData;
 
@@ -241,7 +244,7 @@ function startColorTransitionForElement(targetElement) {
 	}
 
 	colorMin = parseInt( getValue( targetElement, 'color-min'));
-	colorMax = parseInt( getValue( targetElement, 'color-max'));	
+	colorMax = parseInt( getValue( targetElement, 'color-max'));
 	refreshInterval = parseInt( getValue( targetElement, 'refresh-interval'));
 	targetProperty = getValue( targetElement, 'target-property');
 
@@ -272,7 +275,6 @@ function startColorTransition(elementId) {
 		startColorTransitionForAll();
 
 	}
-
 	else {
 
 		startColorTransitionForElement( document.getElementById( elementId.toString() ));
