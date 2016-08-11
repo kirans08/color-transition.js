@@ -9,22 +9,27 @@ function getDefaults() {
 	defaultValues['refresh-interval'] = 25;
 	defaultValues['target-property'] = 'backgroundColor';	
 
-	console.log(defaultValues);
-
 	return defaultValues;
 
 }
 
 
-function getValue(defaultValues, targetElement, property) {
+function getValue(targetElement, property) {
 
-	if(targetElement.hasAttribute(property))
+	var defaultValues;
 	
-		return targetElement.getAttribute(property);
+	if(targetElement.hasAttribute(property)){
 
-	else
+		return targetElement.getAttribute(properxty);
+
+	}
+	else{
+
+		defaultValues = getDefaults();
 
 		return defaultValues[property];
+
+	}
 
 }
 
@@ -36,11 +41,16 @@ function getRandomInt() {
 
 function getUpdateFlag(flag) {
 
-	if( flag == '1')
+	if( flag == '1') {
+
 		return true;
 
-	else if (flag == '0')
+	}
+	else if (flag == '0') {
+
 		return false;
+
+	}
 
 }
 
@@ -48,8 +58,11 @@ function zeroPad(text, size) {
 
 	var i;
 
-	for(i = text.length; i < size; i++)
+	for(i = text.length; i < size; i++) {
+		
 		text = '0' +text;
+
+	}
 
 	return text;
 
@@ -182,7 +195,7 @@ function changeElementColor(targetElement, colorMin, colorMax, targetProperty, r
 
 }
 
-function startColorTransitionForElement(targetElement, defaultValues) {
+function startColorTransitionForElement(targetElement) {
 
 	var colorMin, colorMax, refreshInterval, targetProperty;
 
@@ -192,20 +205,17 @@ function startColorTransitionForElement(targetElement, defaultValues) {
 
 	}
 
-	colorMin = parseInt( getValue(defaultValues, targetElement, 'color-min'));
-
-	colorMax = parseInt( getValue(defaultValues, targetElement, 'color-max'));
-	
-	refreshInterval = parseInt( getValue(defaultValues, targetElement, 'refresh-interval'));
-
-	targetProperty = getValue(defaultValues, targetElement, 'target-property');
+	colorMin = parseInt( getValue( targetElement, 'color-min'));
+	colorMax = parseInt( getValue( targetElement, 'color-max'));	
+	refreshInterval = parseInt( getValue( targetElement, 'refresh-interval'));
+	targetProperty = getValue( targetElement, 'target-property');
 
 	changeElementColor(targetElement, colorMin, colorMax, targetProperty, refreshInterval);
 
 
 }
 
-function startColorTransitionForAll(defaultValues) {
+function startColorTransitionForAll() {
 
 	var targetElements, i, colorMin, colorMax, refreshInterval, targetProperty, targetElement;
 
@@ -215,13 +225,10 @@ function startColorTransitionForAll(defaultValues) {
 
 		targetElement = targetElements[i];
 
-		colorMin = parseInt( getValue(defaultValues, targetElement, 'color-min'));
-
-		colorMax = parseInt( getValue(defaultValues, targetElement, 'color-max'));
-		
-		refreshInterval = parseInt( getValue(defaultValues, targetElement, 'refresh-interval'));
-
-		targetProperty = getValue(defaultValues, targetElement, 'target-property');
+		colorMin = parseInt( getValue( targetElement, 'color-min'));
+		colorMax = parseInt( getValue( targetElement, 'color-max'));		
+		refreshInterval = parseInt( getValue( targetElement, 'refresh-interval'));
+		targetProperty = getValue( targetElement, 'target-property');
 
 		changeElementColor(targetElement, colorMin, colorMax, targetProperty, refreshInterval);
 
@@ -233,17 +240,16 @@ function startColorTransitionForAll(defaultValues) {
 
 function startColorTransition(elementId) {
 
-	defaultValues = getDefaults();
 
 	if(elementId === undefined) {
 
-		startColorTransitionForAll(defaultValues);
+		startColorTransitionForAll();
 
 	}
 
 	else {
 
-		startColorTransitionForElement( document.getElementById( elementId.toString() ), defaultValues);
+		startColorTransitionForElement( document.getElementById( elementId.toString() ));
 
 	}
 
