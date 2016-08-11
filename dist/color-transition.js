@@ -287,6 +287,8 @@ function startColorTransition(elementId) {
 function stopElementColorChange(elementId) {
 
 	clearInterval(elementUpdationStatus[elementId.toString()]);
+	elementUpdationStatus[elementId.toString()] = null;
+
 
 }
 
@@ -327,6 +329,40 @@ function stopColorTransition(elementId) {
 	else {
 
 		stopColorTransitionForElement(elementId);
+
+	}
+}
+
+
+function toggleColorTransitionForElement(elementId) {
+
+	console.log(elementId);
+	if(parseInt(elementUpdationStatus[elementId.toString()]) < 2 || elementUpdationStatus[elementId.toString()] == null){
+
+		console.log('start');
+		startColorTransition(elementId);
+
+	}
+	else {
+		console.log('stop');
+
+		stopColorTransition(elementId);
+		elementUpdationStatus[elementId.toString()] = null;
+
+	}
+
+}
+
+function toggleColorTransition(elementId){
+
+	console.log(elementUpdationStatus);
+
+	if(elementId === undefined){
+
+	}
+	else{
+
+		toggleColorTransitionForElement(elementId);
 
 	}
 }

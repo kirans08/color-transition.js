@@ -3,28 +3,17 @@
 	<title>Color Transition Test</title>
 		<script  src="dist/color-transition.js"></script>
 </head>
-	<body id="y" class="color-transition-target" color-min="190" color-max="250" refresh-interval="1" >
-		<h1 id="t">Test Color Transition Header</h1>
-	
+	<body  class="color-transition-target"  >
+		<h1 id="test_1">Test Color Transition Header</h1>
+		<button onClick= " toggleColorTransition('test_1') ">Toggle</button>
 
 		<script type="text/javascript">
 		onload = function() {
 			startColorTransition();
-			// var t=document.getElementById('t2');
-			// t.setAttribute('target-property','color');
-			// t.setAttribute('color-min','100');
-			// t.setAttribute('color-max','190');
+
 			
 
 
-			setTimeout(function(){
-				console.log('Start');
-				stopColorTransition()
-			},3000);
-			setTimeout(function(){
-				console.log('Stop');
-				startColorTransition()
-			},6000);
 		}
 		</script>
 	</body>
