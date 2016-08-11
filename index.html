@@ -4,6 +4,7 @@
 		<script  src="color-transition.js"></script>
 </head>
 	<body  class="color-transition-target">
+		<h1 id="t">Test Color Transition Header</h1>
 	
 
 		<script type="text/javascript">
@@ -13,9 +14,15 @@
 			// t.setAttribute('target-property','color');
 			// t.setAttribute('color-min','100');
 			// t.setAttribute('color-max','190');
-			// setTimeout(function(){
-			// 	startColorTransition('t2')
-			// },3000)
+			
+
+
+			setTimeout(function(){
+				stopColorTransition()
+			},3000);
+			setTimeout(function(){
+				startColorTransition()
+			},6000);
 		}
 		</script>
 	</body>

@@ -103,6 +103,33 @@ function updateValue(colorCode, dir) {
 
 }
 
+function getCurrentColors(targetElement, targetProperty) {
+
+	var colorData, currentColorValue;
+
+	if(targetElement === undefined || targetProperty === undefined) {
+
+		return false;
+
+	}
+
+	colorData = new Array();
+	currentColorValue = targetElement.style[targetProperty.toString()];
+
+	if(currentColorValue == "") {
+
+		return false;
+
+	}
+
+	colorData['red'] = parseInt( currentColorValue.substr(4,2));
+	colorData['green'] = parseInt( currentColorValue.substr(8,2));
+	colorData['blue'] = parseInt( currentColorValue.substr(12,2));
+
+	return colorData;
+
+}
+
 function updateColors(colorTransitionData) {
 
 	var redUpdate, greenUpdate, blueUpdate, statusBinary, colorMin, colorMax, red, green, blue, redDir, greenDir, blueDir;
@@ -165,9 +192,16 @@ function changeElementColor(targetElement, colorMin, colorMax, targetProperty, r
 		var colorCode;
 		var colorTransitionData = new Array();
 
-		colorTransitionData['red'] = colorMin;
-		colorTransitionData['green'] = colorMin;
-		colorTransitionData['blue'] = colorMin;
+		colorTransitionData = getCurrentColors(targetElement, targetProperty);
+
+		if(colorTransitionData === false) {			
+
+			colorTransitionData = new Array();
+			colorTransitionData['red'] = colorMin;
+			colorTransitionData['green'] = colorMin;
+			colorTransitionData['blue'] = colorMin;
+
+		}
 
 		colorTransitionData['redDir'] = 'UP';
 		colorTransitionData['greenDir'] = 'UP';
