@@ -212,7 +212,6 @@ function startColorTransitionForElement(targetElement) {
 
 	changeElementColor(targetElement, colorMin, colorMax, targetProperty, refreshInterval);
 
-
 }
 
 function startColorTransitionForAll() {
@@ -224,14 +223,7 @@ function startColorTransitionForAll() {
 	for( i = 0; i < targetElements.length; i++) {
 
 		targetElement = targetElements[i];
-
-		colorMin = parseInt( getValue( targetElement, 'color-min'));
-		colorMax = parseInt( getValue( targetElement, 'color-max'));		
-		refreshInterval = parseInt( getValue( targetElement, 'refresh-interval'));
-		targetProperty = getValue( targetElement, 'target-property');
-
-		changeElementColor(targetElement, colorMin, colorMax, targetProperty, refreshInterval);
-
+		startColorTransitionForElement(targetElement);
 
 	}
 
