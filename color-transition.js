@@ -1,4 +1,4 @@
-
+var elementUpdationStatus = new Array();
 
 function getDefaults() {
 	
@@ -12,7 +12,6 @@ function getDefaults() {
 	return defaultValues;
 
 }
-
 
 function getValue(targetElement, property) {
 
@@ -177,21 +176,23 @@ function changeElementColor(targetElement, colorMin, colorMax, targetProperty, r
 		colorTransitionData['colorMin'] = colorMin;
 		colorTransitionData['colorMax'] = colorMax;
 
-		setInterval(
+		elementUpdationStatus[targetElement.id.toString()] = 
 
-			function() {
+			setInterval(
 
-				red = colorTransitionData['red'];
-				green = colorTransitionData['green'];
-				blue = colorTransitionData['blue'];
+				function() {
 
-				colorCode = ( '#' + zeroPad( red.toString(16), 2 ) + zeroPad( green.toString(16), 2 ) + zeroPad( blue.toString(16), 2 ) ).toUpperCase();
-				
-				targetElement.style[ targetProperty.toString() ] = colorCode;
+					red = colorTransitionData['red'];
+					green = colorTransitionData['green'];
+					blue = colorTransitionData['blue'];
 
-				colorTransitionData = updateColors(colorTransitionData);
+					colorCode = ( '#' + zeroPad( red.toString(16), 2 ) + zeroPad( green.toString(16), 2 ) + zeroPad( blue.toString(16), 2 ) ).toUpperCase();
+					
+					targetElement.style[ targetProperty.toString() ] = colorCode;
 
-			}, refreshInterval);
+					colorTransitionData = updateColors(colorTransitionData);
+
+				}, refreshInterval);
 
 }
 
@@ -216,14 +217,13 @@ function startColorTransitionForElement(targetElement) {
 
 function startColorTransitionForAll() {
 
-	var targetElements, i, colorMin, colorMax, refreshInterval, targetProperty, targetElement;
+	var targetElements, i;
 
 	targetElements = document.getElementsByClassName('color-transition-target');
 
 	for( i = 0; i < targetElements.length; i++) {
 
-		targetElement = targetElements[i];
-		startColorTransitionForElement(targetElement);
+		startColorTransitionForElement(targetElements[i]);
 
 	}
 
@@ -247,3 +247,50 @@ function startColorTransition(elementId) {
 
 }
 
+
+function stopElementColorChange(elementId) {
+
+	clearInterval(elementUpdationStatus[elementId.toString()]);
+
+}
+
+function stopColorTransitionForElement(elementId) {
+
+	if(elementId === undefined) {
+
+		return false;
+
+	}
+
+	stopElementColorChange(elementId);
+
+}
+
+function stopColorTransitionForAll() {
+
+	var targetElements, i;
+
+	targetElements = document.getElementsByClassName('color-transition-target');
+
+	for( i = 0; i < targetElements.length; i++) {
+
+		stopColorTransitionForElement(targetElements[i].id);
+
+	}
+
+
+}
+
+function stopColorTransition(elementId) {
+
+	if(elementId === undefined) {
+
+		stopColorTransitionForAll();
+
+	}
+	else {
+
+		stopColorTransitionForElement(elementId);
+
+	}
+}
