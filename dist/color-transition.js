@@ -239,7 +239,7 @@ function startColorTransitionForElement(targetElement) {
 
 	if(targetElement === undefined) {
 
-		return;
+		return false;
 
 	}
 
@@ -336,15 +336,12 @@ function stopColorTransition(elementId) {
 
 function toggleColorTransitionForElement(elementId) {
 
-	console.log(elementId);
 	if(parseInt(elementUpdationStatus[elementId.toString()]) < 2 || elementUpdationStatus[elementId.toString()] == null){
 
-		console.log('start');
 		startColorTransition(elementId);
 
 	}
 	else {
-		console.log('stop');
 
 		stopColorTransition(elementId);
 		elementUpdationStatus[elementId.toString()] = null;
@@ -355,14 +352,12 @@ function toggleColorTransitionForElement(elementId) {
 
 function toggleColorTransition(elementId){
 
-	console.log(elementUpdationStatus);
-
 	if(elementId === undefined){
 
-	}
-	else{
-
-		toggleColorTransitionForElement(elementId);
+		return false;
 
 	}
+
+	toggleColorTransitionForElement(elementId);
+	
 }
