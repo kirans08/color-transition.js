@@ -1,15 +1,19 @@
 <html>
 <head>
-	<title>Color Transition Test</title>
+	<title>Color Transition</title>
 		<script  src="dist/color-transition.js"></script>
 </head>
-	<body  class="color-transition-target" refresh-interval="3" >
-		<h1  class="color-transition-target" align="center" color-min="150" refresh-interval="3" color-max="240" target-property="color">Test Color Transition Header</h1>
-
+	<body class="color-transition-target" color-min="50" refresh-interval="100" color-max="240" refresh-interval="3" style="display: table; width: 100%; height: 100%;">
+			<h1 class="color-transition-target" refresh-interval="20" target-property="color" style="
+				text-align: center;
+				vertical-align: middle;
+				display: table-cell;
+			">Header</h1>
+		</div>
 		<script type="text/javascript">
 		onload = function() {
 			startColorTransition();
 		}
 		</script>
 	</body>
-</html>
+</html> 
